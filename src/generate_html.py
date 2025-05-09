@@ -17,7 +17,7 @@ def generate_page(from_path, template_path, dest_path, basepath):
     html_string = html_node.to_html()
     html_title = extract_title(md_content)
     html_content = tmp_content.replace("{{ Title }}", html_title).replace("{{ Content }}", html_string)
-    rooted_html_content = html_content.replace("href='/", f"href='{basepath}").replace("src='/", f"src='{basepath}")
+    rooted_html_content = html_content.replace("href=\"/", f"href=\"{basepath}").replace("src=\"/", f"src=\"{basepath}")
 
     with open(dest_path, "w") as dest:
         dest.write(rooted_html_content)
