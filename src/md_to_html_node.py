@@ -31,12 +31,36 @@ def block_to_node(block):
             raise ValueError("invalid block type")
 
 def text_to_children(text):
-    text_nodes = text_to_textnodes(text)
+    text_nodes = text_to_textnodes(text) 
     children = []
     for text_node in text_nodes:
         leaf_node = text_node_to_html_node(text_node)
-        children.append(leaf_node)
+        parent_tag = leaf_node.tag
+        checked_node = parse_inline(leaf_node)###
+        if checked_node != leaf_node:
+            checked_node = ParentNode(parent_tag, checked_node)
+        children.append(checked_node)
     return children
+
+def parse_inline(leaf_node):###
+    deliminators = (
+        ("**", "b"),
+        ("_", "i"),
+        ("`", "code")
+    )
+    text = leaf_node.value
+    for deli in deliminators:
+        if deli[0] not in text:
+            continue
+        before, content, after = text.split(deli[0], 2)
+        if after == None:
+            continue
+        return [
+            parse_inline(LeafNode(None, before)),
+            parse_inline(LeafNode(deli[1], content)), 
+            parse_inline(LeafNode(None, after))
+            ]
+    return leaf_node
 
 def paragraph_to_node(block):
     lines = block.split("\n")
