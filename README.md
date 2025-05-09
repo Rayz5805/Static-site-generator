@@ -8,3 +8,5 @@
 
 - [X] multiple pages
 - [ ] nested inline markdowns
+
+See the [example](https://rayz5805.github.io/Static-site-generator/)
