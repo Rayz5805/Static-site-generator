@@ -1,3 +1,8 @@
 __pycache__/
-public/
 src/__pycache__/
+src/test_block_markdown.py
+src/test_gene_html.py
+src/test_htmlnode.py
+src/test_inline_markdown.py
+src/test_mdToHtml.py
+src/test_textnode.py

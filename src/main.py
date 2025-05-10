@@ -4,8 +4,9 @@ import shutil
 from generate_html import generate_page
 
 def main():
-    basepath = sys.argv[1]
-    if not basepath:
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
         basepath = "/"
     generated_dir = "docs"
 
